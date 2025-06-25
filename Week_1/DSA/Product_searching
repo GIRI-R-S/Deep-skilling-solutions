@@ -4,6 +4,7 @@ import java.util.Comparator;
 
 public class Product_searching {
 
+// linear and binary search methods
     static Product linearsearch(Product[] items, String name) {
         for(Product p:items) {
             if (p.Name.equalsIgnoreCase(name)) {
