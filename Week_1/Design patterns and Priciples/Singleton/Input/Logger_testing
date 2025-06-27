@@ -1,0 +1,14 @@
+package singleton;
+public class LoggerTest {
+	public static void main(String[] args) {       
+        Logger log1 = Logger.getInstance();
+        Logger log2 = Logger.getInstance();        
+        log1.log("First log from log1.");
+        log2.log("Second log from log2.");
+        if (log1 == log2) {
+            System.out.println("Success: Both log1 and log2 are the same instance.");
+        } else {
+            System.out.println("Error: Different instances detected!");
+        }
+    }
+}
