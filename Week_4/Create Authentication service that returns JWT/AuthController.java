@@ -25,7 +25,6 @@ public class AuthController {
         String username = credentials[0];
         String password = credentials[1];
 
-        // Dummy check - replace with real user service
         if ("user".equals(username) && "pwd".equals(password)) {
             String token = jwtUtil.generateToken(username);
             return "{\"token\": \"" + token + "\"}";
