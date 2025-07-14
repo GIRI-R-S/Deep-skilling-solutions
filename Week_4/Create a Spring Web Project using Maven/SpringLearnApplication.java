@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class SpringLearnApplication {
     public static void main(String[] args) {
         SpringApplication.run(SpringLearnApplication.class, args);
-        System.out.println("Spring Boot App Started!");
+        System.out.println("Spring Boot Learner App Started!");
     }
 }
 
