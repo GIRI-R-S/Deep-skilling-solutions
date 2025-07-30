@@ -1,0 +1,21 @@
+CREATE OR REPLACE PROCEDURE UpdateEmployeeBonus (
+  dept     IN VARCHAR2,
+  bonus_percent  IN NUMBER
+) IS
+BEGIN
+  FOR emp IN (
+    SELECT EmployeeID, Name, Salary
+    FROM Employees
+    WHERE Department = dept
+  ) LOOP
+    UPDATE Employees
+    SET Salary = emp.Salary + (emp.Salary * bonus_percent / 100)
+    WHERE EmployeeID = emp.EmployeeID;
+
+    DBMS_OUTPUT.PUT_LINE('Updated: ' || emp.Name || 
+                         ', New Salary: ' || TO_CHAR(emp.Salary + (emp.Salary * bonus_percent / 100)));
+  END LOOP;
+END;
+/
+SELECT * FROM EMPLOYEES;
+EXEC UpdateEmployeeBonus('IT', 10);

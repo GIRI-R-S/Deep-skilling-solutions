@@ -1,0 +1,27 @@
+DECLARE
+  due_date DATE;
+  loan_count NUMBER := 0;
+BEGIN
+  FOR rec IN (
+    SELECT l.LoanID, l.CustomerID, c.Name, l.StartDate, l.EndDate
+    FROM Loans l
+    JOIN Customers c ON l.CustomerID = c.CustomerID
+  ) LOOP
+    due_date := rec.StartDate;
+
+    WHILE due_date <= rec.EndDate LOOP
+      IF due_date BETWEEN SYSDATE AND SYSDATE + 30 THEN
+        DBMS_OUTPUT.PUT_LINE('Reminder: Monthly due for Loan ID ' || rec.LoanID || 
+                             ' for customer "' || rec.Name || 
+                             '" on ' || TO_CHAR(due_date, 'DD-MON-YYYY'));
+        loan_count := loan_count + 1;
+      END IF;
+
+      due_date := ADD_MONTHS(due_date, 1);
+    END LOOP;
+  END LOOP;
+
+  IF loan_count = 0 THEN
+    DBMS_OUTPUT.PUT_LINE('No monthly loan dues within the next 30 days.');
+  END IF;
+END;

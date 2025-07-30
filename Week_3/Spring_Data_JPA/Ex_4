@@ -1,0 +1,36 @@
+//JPA
+
+/*
+JPA is a set of rules that defines how Java objects map to database tables.
+
+It does not do anything by itself , it needs a provider like Hibernate to work.
+
+*/
+
+//Hibernate
+
+/*
+Hibernate is an ORM tool that implements JPA, that helps us manage sessions,
+transactions, and queries manually.
+
+eg: 
+Session session = sessionFactory.openSession();
+Transaction tx = session.beginTransaction();
+session.save(employee);
+tx.commit();
+session.close();
+
+*/
+
+//Spring_Data_JPA
+
+/*
+It is a Spring module that uses JPA and Hibernate to simplify data access.
+It is combination of rules and execution 
+eg:
+public interface EmployeeRepository extends JpaRepository<Employee, Integer> {}
+
+@Autowired
+EmployeeRepository repo;
+repo.save(employee); 
+*/

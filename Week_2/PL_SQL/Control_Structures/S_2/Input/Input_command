@@ -1,0 +1,25 @@
+ALTER TABLE Customers ADD IsVIP VARCHAR2(5);
+
+DECLARE
+  vip_count NUMBER := 0;
+BEGIN
+  FOR cust IN (
+    SELECT CustomerID, Name, Balance FROM Customers
+  ) LOOP
+    IF cust.Balance > 10000 THEN
+      UPDATE Customers
+      SET IsVIP = 'TRUE'
+      WHERE CustomerID = cust.CustomerID;
+
+      vip_count := vip_count + 1;
+
+      DBMS_OUTPUT.PUT_LINE('Customer ID: ' || cust.CustomerID || 
+                           ', Name: ' || cust.Name || 
+                           ' marked as VIP. Balance: $' || cust.Balance);
+    END IF;
+  END LOOP;
+
+  IF vip_count = 0 THEN
+    DBMS_OUTPUT.PUT_LINE('No customer has a balance above 10000.');
+  END IF;
+END;
